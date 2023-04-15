@@ -20,10 +20,6 @@ Pengguna dapat berinteraksi dengan aplikasi dengan memasukkan kata kunci atau fr
 
 Proyek ini bergantung pada dependensi berikut:
 
-- express
-- ejs
-- body-parser
-
 Semua dependensi ini dapat diinstal menggunakan perintah `npm install`.
 
 ## Menjalankan Aplikasi
