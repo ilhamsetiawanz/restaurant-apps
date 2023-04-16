@@ -5,11 +5,9 @@ import { responsiveNabar } from './navbar.js';
 
 responsiveNabar();
 
+import { restaurantList } from './restourant-list.js';
 
-import './restourant-list.js'
-const restourantList = document.createElement('ourResto-list');
-document.getElementById('restouran').appendChild(restourantList);
+const restaurantSection = document.getElementById("restouran");
 
-import { restaurantData } from './api.js';
-
-restaurantData();
+const restaurantListElement = new restaurantList();
+restaurantSection.appendChild(restaurantListElement);
