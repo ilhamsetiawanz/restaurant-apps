@@ -1,38 +1,35 @@
-import { restaurantData } from "./api";
+import { restaurantData } from "./api.js";
 
-export class RestaurantList extends HTMLElement {
+export class restaurantList extends HTMLElement {
   constructor() {
     super();
-
     this.attachShadow({ mode: "open" });
-
-    const template = document.createElement("template");
-    template.innerHTML = `
-      <div class="restoList">
-        <div class="restoItem">
-        </div>
-      </div>
-    `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   async connectedCallback() {
     try {
       const restaurants = await restaurantData();
-      const restoItem = this.shadowRoot.querySelector(".restoItem");
+      const restoItem = document.createElement("div");
+      restoItem.classList.add("restoItem");
 
-      restaurants.forEach((restaurants) => {
+      restaurants.forEach((restaurant) => {
         const restoList = document.createElement("div");
         restoList.classList.add("resto");
         restoList.innerHTML = `
-          <img src="${restaurants.pictureId}" alt="${restaurants.name}">
-          <h2>${restaurants.name}</h2>
-          <p>${restaurants.description}</p>
-          <p>Rating: ${restaurants.rating}</p>
-          <p>City: ${restaurants.city}</p>
+          <img src="${restaurant.pictureId}" alt="${restaurant.name}">
+          <h2>${restaurant.name}</h2>
+          <p>${restaurant.description}</p>
+          <p>Rating: ${restaurant.rating}</p>
+          <p>City: ${restaurant.city}</p>
         `;
         restoItem.appendChild(restoList);
       });
+
+      const restoList = document.createElement("div");
+      restoList.classList.add("restoList");
+      restoList.appendChild(restoItem);
+      this.shadowRoot.appendChild(restoList);
+
     } catch (error) {
       console.error(error);
       const errorMessage = document.createElement("p");
@@ -41,4 +38,5 @@ export class RestaurantList extends HTMLElement {
     }
   }
 }
-customElements.define("restaurant-list", RestaurantList);
+
+customElements.define("restaurant-list", restaurantList);
